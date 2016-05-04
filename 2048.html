@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>2048 Replica Game</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="Scripts/AngularJS/2048.js"></script>
+    <link href="Content/2048.css" rel="stylesheet" />
+</head>
+
+<body ng-app="2048" ng-controller="gameController as game">
+    
+
+    <div ng-keydown="game.input($event)" id="init" tabindex="0" class="game-window">
+        
+        <div class="container">
+            <div class="nav">
+                    
+                <div class="scoreBox">
+                    best
+                    <span class="scoreBoxScore">{{game.scoreBest}}</span>
+                </div>
+                    
+                <div class="scoreBox">
+                    score
+                    <span class="scoreBoxScore">{{game.score}}</span>
+                </div>
+                    
+
+                <h1>2048</h1>
+                <div>
+                    <p class="descrText">Merge identical numbers and get to<br /> the <strong>2048 tile!</strong></p>
+                </div>
+                
+                <div class="toRight">
+                    <span class="btn_2048_default" ng-click="game.restart()">New Game (R)</span>
+                </div>
+                
+
+            </div>
+
+            <div class="table-container">
+
+                <!-- GAME LOSS - Floating end game popup overlay-->
+                <div id="overlay-loss" class="overlay-gameEnd" hidden="hidden">
+                    <div class="gameLossMessage">
+                        Game over!
+                    </div>
+                    <div>
+                        <span class="btn_2048_default" ng-click="game.restart()">Try Again</span>
+                    </div>
+                </div>
+
+                <!-- GAME WIN - Floating end game popup overlay-->
+                <div id="overlay-win" class="overlay-gameEnd" hidden="hidden">
+                    <div class="gameWinMessage">
+                        Congratulations!
+                    </div>
+
+                    <p class="text-success">You have successfully created the <strong>2048 tile</strong> and won the game!<br /><br /></p>
+
+                    <div>
+                        <span class="btn_2048_default" ng-click="game.restart()">Play Again</span>
+                    </div>
+                </div>
+
+                <table class="gameBoard">
+                    <tr ng-repeat="x in game.rows">
+                        <td class='tile value{{game.cellValues[x*game.gridWidth + y]}} text-center' ng-repeat="y in game.rows" id="tile-{{x*game.gridWidth + y}}"><span ng-if="game.cellValues[x*game.gridWidth + y] > 0">{{game.cellValues[x*game.gridWidth + y]}}</span></td>
+                    </tr>
+                </table>
+
+                <div id="animDiv" hidden="hidden"></div>
+            
+            </div>
+            
+
+            <div>
+                <p class="info buffer16"><strong>HOW TO PLAY:</strong> Use the <strong>arrow keys</strong> or <strong>W, A, S, D</strong> to move tiles. When two tiles of the same value touch, they <strong>merge into one!</strong></p>
+                
+                <hr />
+                
+                <p class="info"><strong>NOTE:</strong> This is a personal project based entirely on <strong>Gabriele Cirulli's <a href="https://gabrielecirulli.github.io/2048/">2048 game</a></strong>. The visual aspects are imitated closely, however the JavaScript is entirely my own. </p>
+                <p>
+                   
+                </p>
+
+                <hr />
+
+                <p class="info">Created by <a href="mailto:c.w.pyle@gmail.com"><strong>Colin Pyle</strong></a>.</p>
+
+                <!--<hr />
+
+                <p class="info">
+                    <strong>Known Issues:</strong>
+                    <ul>
+                        <li>None</li>
+                    </ul>
+                
+                </p>-->
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
